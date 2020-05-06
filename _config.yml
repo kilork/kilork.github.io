@@ -1,2 +1,3 @@
 name: Alexander Korolev
 theme: jekyll-theme-slate
+permalink: /blog/:year/:month/:day/:title
