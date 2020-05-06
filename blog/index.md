@@ -2,6 +2,7 @@
 layout: default
 title: Alexander Korolev's Blog
 ---
+
 ## {{ page.title }}
 
 {% for post in site.posts %}
