@@ -105,6 +105,7 @@
   audience: people who like DM Mono and live in a terminal.
   repo: https://github.com/kilork/dm-mono-nerd-font
   page: /dm-mono-nerd-font/
+  install: brew install --cask kilork/dm-mono-nerd-font/dm-mono-nerd-font
 
 - name: path-matchers
   group: Rust building blocks

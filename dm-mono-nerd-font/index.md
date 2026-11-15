@@ -6,7 +6,8 @@ title: "dm-mono-nerd-font — DM Mono, with the glyphs a terminal needs"
 <h1>dm-mono-nerd-font</h1>
 <p class="meta">DM Mono patched with Nerd Fonts, plus Cyrillic and box drawing.</p>
 
-<img class="project-image on-light" src="/assets/img/dm-mono-nerd-font.png" alt="DM Mono Nerd Font sample with icons, arrows and Cyrillic">
+<a href="/assets/img/dm-mono-nerd-font.png"><img class="project-image on-light" src="/assets/img/dm-mono-nerd-font.png" alt="DM Mono Nerd Font sample with icons, arrows and Cyrillic"></a>
+<p class="audience">Click the sample for the full-size version.</p>
 
 <p>
   DM Mono is a lovely coding face until your prompt wants a branch icon, your file
