@@ -1,138 +1,64 @@
 ---
 layout: default
-title: "keycloak-cli: the whole Keycloak Admin API as a CLI"
+title: "keycloak-cli — the whole Keycloak admin API, from your shell"
 ---
 
 <h1>keycloak-cli</h1>
-<p class="meta">The whole Keycloak Admin API as a CLI, generated from the crate.</p>
+<p class="meta">Every admin operation as a command, generated from the crate.</p>
+
+<img class="project-image" src="/assets/img/keycloak-cli.svg" alt="keycloak-cli output: a clients table, a dry-run delete, and the --yes guard">
 
 <p>
-  Keycloak's Admin REST API is 415 operations across realms, users, groups,
-  clients, roles, scopes, identity providers, organizations, authentication flows,
-  events, sessions and authorization services. The official <code>kcadm.sh</code>
-  covers a small, curated slice of that. Everything else is <code>curl</code>,
-  assembled by hand, with the token, the realm and the URL shape typed again every
-  time.
+  Keycloak's admin API has 415 operations. <code>kcadm.sh</code> covers the
+  useful-looking ones; for everything else you end up writing curl with a token you
+  fetched by hand, and typing the same realm and URL shape again next week.
 </p>
 
 <p>
-  <a href="https://github.com/rust-utility/keycloak-cli">keycloak-cli</a> is the
-  other option: one command per operation, named after the API path and verb.
+  This is the whole thing as commands, named after the API path and verb, so
+  <code>clients list</code>, <code>users role-mappings realm get</code> and
+  <code>organizations invitations resend</code> all just exist.
 </p>
 
-<pre><code>keycloak-cli clients list --first 10
-keycloak-cli clients get 8a1b…                 # client uuid
-keycloak-cli users list --search alice --max 5
-keycloak-cli users role-mappings realm get &lt;user-id&gt;
-keycloak-cli -r other users count</code></pre>
+<h2>What changes for you</h2>
 
-<h2>Why it is generated</h2>
+<ul>
+  <li><strong>You log in once per terminal.</strong> <code>keycloak-cli login</code>
+    keeps the token for that shell; scripts and completions reuse it. Another
+    terminal asks for a password until it logs in — that is the point.</li>
+  <li><strong>TAB knows your data.</strong> After logging in, <code>--realm</code>
+    completes realm names and user, group and client arguments complete from the
+    API. Values are cached for a minute, so the next TAB is instant.</li>
+  <li><strong>The output fits the caller.</strong> Table in a terminal, JSON when
+    piped, or YAML, markdown and HTML on request; <code>--fields</code> picks the
+    columns.</li>
+  <li><strong>You can look before you leap.</strong> <code>--dry-run</code> prints
+    the request (method, URL with its query, and the body), and every
+    <code>delete</code> needs <code>--yes</code>.</li>
+  <li><strong>There is a report, too.</strong> <code>keycloak-cli report</code> writes
+    a markdown or self-contained HTML page with charts of users, events and
+    sessions, for the times a table is not the answer.</li>
+</ul>
 
-<p>
-  The CLI does not describe the API itself. It is generated from the
-  <a href="https://crates.io/crates/keycloak">keycloak</a> crate — the same OpenAPI
-  description, the same 22 <code>tag-*</code> resource features — and every command
-  carries the HTTP method, the path, the parameter types and the exact crate method
-  it calls. <code>scripts/generate.sh</code> downloads the published crate tarball,
-  unpacks it and regenerates the tree; CI fails if the committed sources differ by a
-  byte, and a test keeps the CLI's features equal to the crate's own
-  <code>tags cargo</code> output.
-</p>
-
-<p>
-  That is the whole design: there is no second description of Keycloak to drift
-  from. A command cannot exist for an operation the crate does not have, and cannot
-  call one with the wrong shape.
-</p>
-
-<h2>What using it feels like</h2>
-
-<p>
-  <strong>A session per terminal.</strong> <code>keycloak-cli login</code> stores a
-  token for the terminal you are in (0600 file, keyed by tty and shell session, with
-  expiry). Scripts and completions in that terminal reuse it; another terminal asks
-  for a password until it logs in.
-</p>
-
-<p>
-  <strong>Completion with live values.</strong> <code>init bash|zsh|fish</code>
-  prints the lines to source at shell start. After a login, TAB offers the realms,
-  users, groups and clients of the session, from the API, cached for a minute on
-  disk so the next TAB is instant. Every lookup is bounded: 1.2 s timeout, at most
-  100 candidates, silence on failure.
-</p>
-
-<p>
-  <strong>Output that fits the caller.</strong> A table in a terminal, JSON when
-  piped, or YAML, markdown and HTML on request, with <code>--fields</code> to pick
-  columns.
-</p>
-
-<p>
-  <strong>A report, not just a dump.</strong>
-</p>
-
-<pre><code># keycloak-cli report — realm `master`
-
-## Users
-12 users in total: 10 enabled, 2 disabled.
-enabled   ████████████████████████████████████ 10
-disabled  ███████ 2
-
-## Events by type
-13 events in the last sample of at most 1000.
-LOGIN          ████████████████████████████████████ 7
-LOGOUT         ███████████ 3
-CODE_TO_TOKEN  ████████ 2
-
-## Sessions per client
-10 active sessions in 3 clients.
-web     ████████████████████████████████████ 5
-api     ██████████████████ 3
-mobile  ████████████ 2</code></pre>
-
-<p>
-  <strong>Nothing destructive by accident.</strong> <code>--dry-run</code> prints the
-  request a command would send — method, URL with its query, and the body a mutation
-  would carry — and changes nothing. Every <code>delete</code> refuses to run without
-  <code>--yes</code>.
-</p>
-
-<h2>Install and update</h2>
+<h2>Getting it</h2>
 
 <pre><code>curl -fsSL https://raw.githubusercontent.com/rust-utility/keycloak-cli/main/install.sh | sh
 keycloak-cli self-update --check</code></pre>
 
 <p>
-  The installer and <code>keycloak-cli self-update</code> download the binary for
-  macOS (arm64/x86_64) or static musl Linux (aarch64/x86_64), verify it against the
-  release's <code>SHA256SUMS</code> and replace it atomically. Or
-  <code>cargo install keycloak-cli</code>; the crate is on
-  <a href="https://crates.io/crates/keycloak-cli">crates.io</a> and its version
-  follows the wrapped one (<code>x.y.(z*100+v)</code>, so 26.8.102 wraps Keycloak
-  26.8.1 with fix release 2).
+  The installer downloads the binary for your platform (macOS arm64/x86_64, static
+  musl Linux aarch64/x86_64), checks it against the release's
+  <code>SHA256SUMS</code> and installs it. <code>keycloak-cli self-update</code>
+  does the same from the CLI. <code>cargo install keycloak-cli</code> works as well.
 </p>
 
-<h2>What went wrong on the way</h2>
+<h2>A five-line script</h2>
 
-<p>
-  The first two releases are worth recording. 26.8.101 shipped without a TLS
-  backend, because the wrapped crate pulls <code>reqwest</code> in with
-  <code>default-features = false</code> and nobody provided one: every
-  <code>https://</code> server failed. The bug surfaced while testing
-  <code>self-update</code> against GitHub. The fix went into 26.8.102 together with
-  a CI check that the TLS feature stays in the dependency tree, and a note on the
-  older release pointing at the new one. A broken release cannot be republished
-  under the same version — it is superseded, and optionally yanked (the
-  trusted-publisher token used for uploads cannot yank, that needs a personal token).
-</p>
-
-<p>
-  The GitHub Actions side has a similar wart: this organisation never gets macOS
-  runners assigned, so the Linux binaries are built by the release workflow while the
-  Apple ones are built on a Mac by <code>scripts/release-macos.sh</code>, which also
-  writes the checksums. Documented rather than hidden.
-</p>
+<pre><code>keycloak-cli login
+for c in $(keycloak-cli clients list --fields clientId | tail -n +2); do
+  keycloak-cli clients get "$c"
+done
+keycloak-cli logout</code></pre>
 
 <h2>Where to look</h2>
 

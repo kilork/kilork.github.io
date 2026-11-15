@@ -5,10 +5,12 @@ title: Projects
 
 <h1>Projects</h1>
 
+<img class="project-image" src="/assets/img/projects-hero.svg" alt="A terminal running keycloak-cli report, with a bar chart of users and events">
+
 <p>
-  I build things when an existing tool either does not exist or does not survive
-  contact with a real system. This page collects the ones worth finding again,
-  grouped by what they are for, with the reason each one exists.
+  Things I built because the existing tool either did not exist or did not survive
+  contact with a real system. Each one says what changes for you if you use it,
+  not what it contains. If a page is linked, it has a longer note.
 </p>
 
 {% assign groups = site.data.projects | group_by: "group" %}
@@ -19,10 +21,9 @@ title: Projects
     <h3>
       {% if project.page %}<a href="{{ project.page | relative_url }}">{{ project.name }}</a>
       {% else %}<a href="{{ project.repo }}">{{ project.name }}</a>{% endif %}
-      <span class="status">{{ project.status }}</span>
     </h3>
     <p class="tagline">{{ project.tagline }}</p>
-    <p>{{ project.why }}</p>
+    <p>{{ project.benefit }}</p>
     <p class="audience">For {{ project.audience }}</p>
     <p class="links">
       <a href="{{ project.repo }}">source</a>

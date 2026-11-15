@@ -1,134 +1,153 @@
 # Curated catalog for /projects/.
 #
-# One entry per project worth finding from here. `why` is the point: what problem
-# it exists for, not what it contains. Keep the list short — this is a signpost,
-# not an inventory.
-
-- name: openid
-  group: OpenID and Keycloak
-  tagline: An OpenID Connect client library for Rust.
-  why: >-
-    OpenID Connect in Rust was either incomplete or tangled with a web framework.
-    This crate keeps discovery, JWKS, token validation and userinfo in one place and
-    lets the application decide how to serve them.
-  audience: Rust services that need to log users in through an identity provider.
-  repo: https://github.com/kilork/openid
-  crate: https://crates.io/crates/openid
-  install: cargo add openid
-  status: mature
-
-- name: keycloak
-  group: OpenID and Keycloak
-  tagline: A generated Rust client for the Keycloak Admin REST API.
-  why: >-
-    Keycloak describes its admin API as one large OpenAPI document; a faithful Rust
-    client has to be generated from it or it falls behind. The crate is regenerated
-    for every Keycloak release, with a feature per resource tag so a build only pays
-    for the parts it uses.
-  audience: Rust services that administer realms, users, clients and roles.
-  repo: https://github.com/kilork/keycloak
-  crate: https://crates.io/crates/keycloak
-  install: cargo add keycloak
-  status: mature
+# `benefit` is the point: what changes for someone who starts using it. Keep the
+# list short — this is a signpost, not an inventory.
 
 - name: keycloak-cli
-  group: Command-line tools
-  tagline: The whole Keycloak Admin API as a CLI, generated from the crate.
-  why: >-
-    Scripting Keycloak means choosing between the official kcadm.sh (a fraction of
-    the API) and hand-written curl. This CLI has one command per admin operation —
-    all 415 of them — named after the API path and verb, generated from the same
-    pinned crate, with a session per terminal, live shell completion and reports.
-  audience: platform and IAM teams scripting Keycloak in shell and CI.
+  group: Keycloak and identity
+  tagline: Every Keycloak admin operation as a command, generated from the crate.
+  benefit: >-
+    No more curl with a token you fetched by hand. Log in once per terminal and the
+    password stays there; TAB completes your realms, users, groups and clients;
+    output is a table, JSON, YAML, markdown or HTML; `--dry-run` shows the request
+    before anything happens and deletes need `--yes`.
+  audience: anyone scripting Keycloak instead of clicking through the admin console.
   repo: https://github.com/rust-utility/keycloak-cli
   crate: https://crates.io/crates/keycloak-cli
   page: /keycloak-cli/
-  install: >-
-    curl -fsSL https://raw.githubusercontent.com/rust-utility/keycloak-cli/main/install.sh | sh
-  status: new
+  install: curl -fsSL https://raw.githubusercontent.com/rust-utility/keycloak-cli/main/install.sh | sh
+
+- name: keycloak
+  group: Keycloak and identity
+  tagline: The Keycloak Admin API as typed Rust.
+  benefit: >-
+    All 415 admin operations, generated from Keycloak's own description for the
+    release you pin, so the client cannot quietly fall behind the server. Turn on
+    only the resource groups you use and the rest never compiles.
+  audience: Rust services that administer realms, users, clients and roles.
+  repo: https://github.com/kilork/keycloak
+  crate: https://crates.io/crates/keycloak
+  page: /keycloak/
+  install: cargo add keycloak
+
+- name: openid
+  group: Keycloak and identity
+  tagline: Log users in with any OpenID provider, without adopting a web framework.
+  benefit: >-
+    Discovery, the authorization-code flow with PKCE, token validation against the
+    provider's keys and userinfo — functions you call from the handlers you already
+    have. Google, Keycloak, Azure AD and Okta all work the same way.
+  audience: Rust services that need real login.
+  repo: https://github.com/kilork/openid
+  crate: https://crates.io/crates/openid
+  page: /openid/
+  install: cargo add openid
 
 - name: xfs-doctor
-  group: Command-line tools
-  tagline: Read-only recovery toolkit for damaged XFS images.
-  why: >-
-    When an XFS filesystem stops mounting, the tools that could help assume it
-    mounts. xfs-doctor reads images and devices without mounting them, decodes
-    superblocks and AGIs at any offset, maps RAID0 halves, salvages inodes and
-    directories, and carves files by signature — never writing to the image.
-  audience: anyone staring at a NAS that will not mount.
+  group: Recovery and forensics
+  tagline: Read-only rescue tools for XFS images that will not mount.
+  benefit: >-
+    Inspect headers at any offset, work out a RAID0 half-image's geometry, salvage
+    directories without mounting anything, and carve files by signature when the
+    metadata is gone. It never writes to the image and does not need the array.
+  audience: anyone with a NAS that stopped mounting and data they still want.
   repo: https://github.com/rust-utility/xfs-doctor
   crate: https://crates.io/crates/xfs-doctor
+  page: /xfs-doctor/
   install: cargo install xfs-doctor
-  status: young
+
+- name: hg-git-fast-import
+  group: Recovery and forensics
+  tagline: Move Mercurial history into Git, including the awkward parts.
+  benefit: >-
+    One Mercurial repository or many into a single Git repository, through
+    fast-import, keeping tags and closed branches. Re-run it to pick up new
+    revisions, and check the result with a diff before you trust it.
+  audience: people leaving Mercurial without leaving their history behind.
+  repo: https://github.com/kilork/hg-git-fast-import
+  crate: https://crates.io/crates/hg-git-fast-import
+  page: /hg-git-fast-import/
+  install: cargo install hg-git-fast-import
+
+- name: git-site-clone
+  group: Everyday tools
+  tagline: Paste a repo URL and it lands where you keep code.
+  benefit: >-
+    Configure a base directory once, and `git-site-clone https://github.com/user/repo`
+    checks out into `base/github.com/user/repo` — no mkdir dance. Mappings let a
+    host point somewhere else, and it can take the URL from the clipboard.
+  audience: people with a tidy ~/src tree and no patience for manual clones.
+  repo: https://github.com/rust-application/git-site-clone
+  crate: https://crates.io/crates/git-site-clone
+  page: /git-site-clone/
+  install: cargo install git-site-clone
 
 - name: handlebars-magic
-  group: Command-line tools
-  tagline: Generates files and reports from handlebars templates.
-  why: >-
-    Reporting usually ends in a hand-written script per format. This tool renders a
-    set of templates from structured data, so one source produces documentation,
-    reports and configuration in whatever shape a consumer needs.
-  audience: people who generate documentation or reports from data.
+  group: Everyday tools
+  tagline: One folder of handlebars templates, one rendered folder.
+  benefit: >-
+    Documentation, reports and configs from the same data: each template in the
+    input directory produces the matching file in the output directory, with the
+    usual handlebars helpers.
+  audience: people who generate files instead of editing them.
   repo: https://github.com/rust-utility/handlebars-magic
   crate: https://crates.io/crates/handlebars-magic
+  page: /handlebars-magic/
   install: cargo install handlebars-magic
-  status: mature
+
+- name: dm-mono-nerd-font
+  group: Everyday tools
+  tagline: DM Mono with the glyphs your terminal expects.
+  benefit: >-
+    Nerd Font icons, Cyrillic, arrows and box drawing, all at the same width, so
+    prompt themes and file managers stop rendering boxes. Ships as release archives
+    and a Homebrew tap.
+  audience: people who like DM Mono and live in a terminal.
+  repo: https://github.com/kilork/dm-mono-nerd-font
+  page: /dm-mono-nerd-font/
 
 - name: path-matchers
   group: Rust building blocks
-  tagline: A collection of path matchers.
-  why: >-
-    Matching paths with glob rules is easy to get subtly wrong. This crate collects
-    the matchers behind a small trait so libraries can share one implementation
-    instead of each growing its own.
-  audience: library authors who filter paths.
+  tagline: Glob and path matching you can combine.
+  benefit: >-
+    One small trait over plain paths and glob expressions, so your code filters
+    paths without growing its own matcher — and two matchers can be combined.
+  audience: library authors who keep writing path filtering.
   repo: https://github.com/rust-utility/path-matchers
   crate: https://crates.io/crates/path-matchers
+  page: /path-matchers/
   install: cargo add path-matchers
-  status: mature
 
 - name: change-detection
   group: Rust building blocks
-  tagline: Change detection instructions generated at build time.
-  why: >-
-    Rebuilding on every change is wasteful, and guessing which inputs matter is
-    fragile. This crate emits the instructions a build needs so a step can tell
-    whether its inputs really changed.
-  audience: build tooling and incremental pipelines.
+  tagline: Tell Cargo exactly what your build script depends on.
+  benefit: >-
+    Generates the rerun-if-changed instructions for your static inputs, so a build
+    re-runs when something actually changed and stays incremental when nothing did.
+  audience: build tooling and anything with a build script.
   repo: https://github.com/rust-utility/change-detection
   crate: https://crates.io/crates/change-detection
+  page: /change-detection/
   install: cargo add change-detection
-  status: mature
 
 - name: cmake-parser
   group: Rust building blocks
-  tagline: Parses CMakeLists.txt.
-  why: >-
-    CMake files are the only description many C and C++ projects have. Parsing them
-    is the first step to reading a build instead of guessing at it.
-  audience: tools that inspect or migrate C/C++ builds.
+  tagline: Read CMakeLists.txt as data.
+  benefit: >-
+    Parses CMake files (language 3.26) into structures you can inspect and
+    transform, instead of pulling your hair out with regular expressions.
+  audience: tools that read or migrate C and C++ builds.
   repo: https://github.com/rust-utility/cmake-parser
   crate: https://crates.io/crates/cmake-parser
+  page: /cmake-parser/
   install: cargo add cmake-parser
-  status: beta
 
 - name: rust-libxml
   group: Rust building blocks
-  tagline: A Rust wrapper for libxml2.
-  why: >-
-    When documents have to be handled exactly as libxml2 handles them, a reimplementation
-    is the wrong answer. This wraps libxml2 without hiding it.
-  audience: Rust programs that already depend on libxml2's behaviour.
+  tagline: Use libxml2 from Rust when exact behaviour matters.
+  benefit: >-
+    Wraps libxml2 without hiding it: Rust ownership, automatic deallocation, and
+    the parser behaviour your documents were already written against.
+  audience: Rust programs that cannot afford a different XML parser.
   repo: https://github.com/kilork/rust-libxml
-  status: mature
-
-- name: dm-mono-nerd-font
-  group: Other
-  tagline: DM Mono, patched with Nerd Fonts.
-  why: >-
-    DM Mono is a clean coding face but has none of the icon glyphs a terminal
-    expects. This is the same font with the Nerd Fonts patch applied, shipped as
-    release archives and a Homebrew tap.
-  audience: terminal and editor users who like DM Mono.
-  repo: https://github.com/kilork/dm-mono-nerd-font
-  status: maintained
+  page: /rust-libxml/
