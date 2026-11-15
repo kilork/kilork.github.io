@@ -1,4 +1,5 @@
 _site/
+__pycache__/
 
 # Agent tooling, not site content.
 AGENTS.md
