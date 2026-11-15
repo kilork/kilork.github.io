@@ -1,7 +1,38 @@
 # Curated catalog for /projects/.
 #
+# Groups are rendered in this order; the static-assets family is the most used of
+# them all (1.6M and 700k downloads), so it goes first.
+#
 # `benefit` is the point: what changes for someone who starts using it. Keep the
 # list short — this is a signpost, not an inventory.
+
+- name: static-files
+  group: Static assets and web
+  tagline: Bundle a directory of static files into your Rust binary.
+  benefit: >-
+    Point <code>build.rs</code> at <code>static/</code> and the files become Rust
+    data compiled into the executable: one binary to ship, no assets directory next
+    to it, no path to configure in production. It can run your npm/yarn build on the
+    way, and it only re-bundles when the inputs actually changed.
+  audience: Rust services that ship a frontend.
+  repo: https://github.com/static-files-rs/static-files
+  crate: https://crates.io/crates/static-files
+  page: /static-files/
+  install: cargo add static-files
+
+- name: actix-web-static-files
+  group: Static assets and web
+  tagline: Serve those embedded files from actix-web.
+  benefit: >-
+    One service, <code>ResourceFiles::new("/", generate())</code>, and every bundled
+    file is served from memory with the right content type — no filesystem lookup on
+    the request path. Routes that are not files fall back to <code>index.html</code>,
+    which is what Angular-style routers need.
+  audience: actix-web 4 services with a web UI.
+  repo: https://github.com/kilork/actix-web-static-files
+  crate: https://crates.io/crates/actix-web-static-files
+  page: /actix-web-static-files/
+  install: cargo add actix-web-static-files --features static-files-03
 
 - name: keycloak-cli
   group: Keycloak and identity

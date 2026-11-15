@@ -88,6 +88,52 @@ def write(name, content):
     print("wrote", os.path.relpath(path, ROOT), len(content), "bytes")
 
 def draw():
+    # ---------------------------------------------------------------- static-files
+    b = []
+    b.append(text(30, 42, "static files, bundled into the binary at build time", 17, MUTED, family=SANS))
+    # source folder
+    b.append(rect(30, 70, 280, 200))
+    b.append(text(50, 104, "static/", 18, GREEN, "700", SANS))
+    for i, name in enumerate(("index.html", "app.js", "style.css", "assets/logo.svg")):
+        b.append(text(60, 140 + i * 28, name, 16, MUTED))
+    # build step
+    b.append(arrow(310, 170, 400, 170, label="build.rs"))
+    b.append(rect(410, 70, 280, 200))
+    b.append(text(430, 104, "resource_dir(\"static\")", 16, BLUE))
+    b.append(text(430, 140, ".build()", 16, BLUE))
+    b.append(text(430, 178, "generated.rs", 16, TEXT))
+    b.append(text(430, 210, "npm / yarn run here", 15, MUTED))
+    # binary
+    b.append(arrow(690, 170, 780, 170, label="rustc"))
+    b.append(rect(790, 70, 280, 200))
+    b.append(text(810, 104, "your binary", 18, TEXT, "700", SANS))
+    b.append(text(810, 144, "one executable,", 16, MUTED))
+    b.append(text(810, 172, "no static/ to ship,", 16, MUTED))
+    b.append(text(810, 200, "no path to configure", 16, MUTED))
+    b.append(rect(810, 220, 150, 32, fill="#1f6feb22", stroke=BLUE, rx=16))
+    b.append(text(885, 242, "change detection", 13, BLUE, anchor="middle"))
+    write("static-files.svg", svg(1100, 300, "".join(b)))
+
+    # ---------------------------------------------------------------- actix-web-static-files
+    b = []
+    b.append(text(30, 42, "a request for a static asset, answered from memory", 17, MUTED, family=SANS))
+    b.append(rect(30, 96, 300, 110))
+    b.append(text(50, 130, "browser", 18, TEXT, "700", SANS))
+    b.append(text(50, 168, "GET /app.js", 17, BLUE))
+    b.append(arrow(340, 132, 430, 132, label="HTTP"))
+    b.append(rect(440, 70, 330, 160))
+    b.append(text(460, 104, "actix-web app", 18, TEXT, "700", SANS))
+    b.append(text(460, 140, "ResourceFiles::new(", 15, BLUE))
+    b.append(text(460, 164, "  \"/\", generate())", 15, BLUE))
+    b.append(text(460, 198, "no filesystem lookup", 15, MUTED))
+    b.append(arrow(780, 132, 850, 132, label="200 OK"))
+    b.append(rect(860, 96, 220, 110))
+    b.append(text(880, 132, "embedded", 17, GREEN, "700", SANS))
+    b.append(text(880, 164, "bytes", 17, GREEN, "700", SANS))
+    b.append(text(880, 192, "compressed at build", 13, MUTED))
+    b.append(text(30, 250, "an Angular-style router works too: unknown paths fall back to index.html", 16, MUTED, family=SANS))
+    write("actix-web-static-files.svg", svg(1100, 280, "".join(b)))
+
     # ---------------------------------------------------------------- hero
     b = []
     b.append(text(40, 96, "projects", 52, TEXT, "700", SANS))
