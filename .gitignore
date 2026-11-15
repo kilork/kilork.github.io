@@ -1,1 +1,5 @@
 _site/
+
+# Agent tooling, not site content.
+AGENTS.md
+skills/
