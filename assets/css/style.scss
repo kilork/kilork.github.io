@@ -2,3 +2,35 @@
 ---
 
 @import "{{ site.theme }}";
+// Project catalog and article pages.
+.project {
+  border-left: 3px solid #159957;
+  padding: 0 0 0 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.project h3 {
+  margin-bottom: 0.2rem;
+}
+.project h3 .status {
+  font-size: 0.7rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-left: 0.5rem;
+}
+.project .tagline {
+  font-weight: 600;
+  margin: 0.2rem 0 0.6rem;
+}
+.project .audience,
+.project .links,
+p.meta {
+  color: #666;
+  font-size: 0.9rem;
+}
+.project pre {
+  background: #f3f3f3;
+  padding: 0.6rem 0.8rem;
+  overflow-x: auto;
+}
