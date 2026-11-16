@@ -135,3 +135,9 @@ dd code {
   font-size: 0.9em;
   box-shadow: none;
 }
+
+// The slate theme's .inner is content-box, so its padding pushed the page 20px
+// wider than a 480px viewport and text was clipped on phones.
+.inner {
+  box-sizing: border-box;
+}

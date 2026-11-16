@@ -39,7 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Clipboard API where available, a hidden textarea otherwise (http, old browsers).
+// Clipboard API where available, a hidden textarea otherwise. The async API is
+// rejected in some contexts (no user gesture, unfocused document, permissions), so
+// a rejection falls back to the old path instead of reporting failure.
 function copyText(text) {
   if (navigator.clipboard && window.isSecureContext) {
     return navigator.clipboard.writeText(text).then(
@@ -47,10 +49,14 @@ function copyText(text) {
         return true;
       },
       function () {
-        return false;
+        return legacyCopy(text);
       }
     );
   }
+  return Promise.resolve(legacyCopy(text));
+}
+
+function legacyCopy(text) {
   var area = document.createElement('textarea');
   area.value = text;
   area.style.position = 'fixed';
@@ -64,5 +70,5 @@ function copyText(text) {
     copied = false;
   }
   document.body.removeChild(area);
-  return Promise.resolve(copied);
+  return copied;
 }
