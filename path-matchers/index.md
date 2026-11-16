@@ -24,9 +24,9 @@ title: "path-matchers — glob and path matching you can combine"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo add path-matchers</code></pre>
+<pre><code class="language-bash">cargo add path-matchers</code></pre>
 
-<pre><code>use path_matchers::{glob, PathMatcher};
+<pre><code class="language-rust">use path_matchers::{glob, PathMatcher};
 
 let best_images = glob("images/**/best.*")?;
 assert!(best_images.matches(&amp;PathBuf::from("images/small/32x32/best.jpg")));</code></pre>

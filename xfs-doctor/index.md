@@ -31,11 +31,11 @@ title: "xfs-doctor — getting data back from an XFS image that will not mount"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo install xfs-doctor</code></pre>
+<pre><code class="language-bash">cargo install xfs-doctor</code></pre>
 
 <p>A damaged image is usually explored in this order:</p>
 
-<pre><code>xfs-doctor read --device disk.img sb                     # find the superblock
+<pre><code class="language-bash">xfs-doctor read --device disk.img sb                     # find the superblock
 xfs-doctor read --device disk.img --offset 0x100000 sb   # ...or at an offset
 xfs-doctor salvage --device disk.img --sb sb.bin \
   --chunk 512K --data-offset 8K --member 1 --out salvage/ --scan 256M

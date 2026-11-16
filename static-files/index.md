@@ -33,26 +33,26 @@ title: "static-files — bundle a website into your Rust binary"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo add static-files --build
+<pre><code class="language-bash">cargo add static-files --build
 cargo add static-files</code></pre>
 
 <p>Minimal case — a folder of files:</p>
 
-<pre><code>// build.rs
+<pre><code class="language-rust">// build.rs
 use static_files::resource_dir;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
     resource_dir("./static").build()
 }</code></pre>
 
-<pre><code>// src/main.rs
+<pre><code class="language-rust">// src/main.rs
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
 let resources = generate();   // index.html, app.js, … as bytes</code></pre>
 
 <p>With a frontend that needs building first:</p>
 
-<pre><code>// build.rs
+<pre><code class="language-rust">// build.rs
 use static_files::NpmBuild;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {

@@ -25,9 +25,9 @@ title: "cmake-parser — read CMakeLists.txt as data"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo add cmake-parser</code></pre>
+<pre><code class="language-bash">cargo add cmake-parser</code></pre>
 
-<pre><code>use cmake_parser::parse_cmakelists;
+<pre><code class="language-rust">use cmake_parser::parse_cmakelists;
 
 for command in parse_cmakelists(text)? {
     // command.name, command.arguments, ...

@@ -27,7 +27,7 @@ title: "handlebars-magic — one folder of templates, one rendered folder"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo install handlebars-magic
+<pre><code class="language-bash">cargo install handlebars-magic
 handlebars-magic templates .      # render templates/ into the current directory</code></pre>
 
 <p>

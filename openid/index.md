@@ -33,11 +33,11 @@ title: "openid — log users in without adopting a web framework"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo add openid</code></pre>
+<pre><code class="language-bash">cargo add openid</code></pre>
 
 <p>Roughly the shape of it:</p>
 
-<pre><code>let client = DiscoveredClient::discover(client_id, client_secret, None, issuer).await?;
+<pre><code class="language-rust">let client = DiscoveredClient::discover(client_id, client_secret, None, issuer).await?;
 let (auth_url, _csrf) = client.auth_url(Default::default());
 // ...the provider redirects back with a code...
 let token = client.request_token(&amp;code).await?;

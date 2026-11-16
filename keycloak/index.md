@@ -32,17 +32,17 @@ title: "keycloak — the Keycloak admin API as typed Rust"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo add keycloak</code></pre>
+<pre><code class="language-bash">cargo add keycloak</code></pre>
 
 <p>Then acquire an admin token and call the API:</p>
 
-<pre><code>let token = KeycloakAdminToken::acquire(&amp;url, &amp;user, &amp;password, &amp;client).await?;
+<pre><code class="language-rust">let token = KeycloakAdminToken::acquire(&amp;url, &amp;user, &amp;password, &amp;client).await?;
 let admin = KeycloakAdmin::new(&amp;url, token, client);
 let clients = admin.realm_clients_get("master", None, Some(0), Some(10), None, None, None).await?;</code></pre>
 
 <p>Turning features off keeps a build lean:</p>
 
-<pre><code>keycloak = { version = "26.8.100", default-features = false, features = ["reqwest", "tag-users", "tag-clients"] }</code></pre>
+<pre><code class="language-toml">keycloak = { version = "26.8.100", default-features = false, features = ["reqwest", "tag-users", "tag-clients"] }</code></pre>
 
 <h2>Where to look</h2>
 

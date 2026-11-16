@@ -25,9 +25,9 @@ title: "change-detection — rebuild only when your inputs changed"
 
 <h2>Getting it</h2>
 
-<pre><code>cargo add --build change-detection</code></pre>
+<pre><code class="language-bash">cargo add --build change-detection</code></pre>
 
-<pre><code>// build.rs
+<pre><code class="language-rust">// build.rs
 use change_detection::ChangeDetection;
 
 fn main() {

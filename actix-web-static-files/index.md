@@ -32,17 +32,17 @@ title: "actix-web-static-files — serve embedded files from actix-web"
 
 <h2>Getting it</h2>
 
-<pre><code>actix-web-static-files = { version = "4.1", features = ["static-files-03"] }
+<pre><code class="language-toml">actix-web-static-files = { version = "4.1", features = ["static-files-03"] }
 static-files = "0.3"</code></pre>
 
-<pre><code>// build.rs
+<pre><code class="language-rust">// build.rs
 use static_files::resource_dir;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
     resource_dir("./static").build()
 }</code></pre>
 
-<pre><code>use actix_web::{App, HttpServer};
+<pre><code class="language-rust">use actix_web::{App, HttpServer};
 use actix_web_static_files::ResourceFiles;
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
