@@ -25,14 +25,13 @@ title: "change-detection — rebuild only when your inputs changed"
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash">cargo add --build change-detection</code></pre>
+<figure class="code"><pre><code class="language-bash">cargo add --build change-detection</code></pre></figure>
 
-<pre><code class="language-rust">// build.rs
-use change_detection::ChangeDetection;
+<figure class="code" data-file="build.rs"><pre><code class="language-rust">use change_detection::ChangeDetection;
 
 fn main() {
     ChangeDetection::path("templates").generate();
-}</code></pre>
+}</code></pre></figure>
 
 <h2>Where to look</h2>
 

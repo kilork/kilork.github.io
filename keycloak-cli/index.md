@@ -42,8 +42,8 @@ title: "keycloak-cli — the whole Keycloak admin API, from your shell"
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/rust-utility/keycloak-cli/main/install.sh | sh
-keycloak-cli self-update --check</code></pre>
+<figure class="code"><pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/rust-utility/keycloak-cli/main/install.sh | sh
+keycloak-cli self-update --check</code></pre></figure>
 
 <p>
   The installer downloads the binary for your platform (macOS arm64/x86_64, static
@@ -54,11 +54,11 @@ keycloak-cli self-update --check</code></pre>
 
 <h2>A five-line script</h2>
 
-<pre><code class="language-bash">keycloak-cli login
+<figure class="code"><pre><code class="language-bash">keycloak-cli login
 for c in $(keycloak-cli clients list --fields clientId | tail -n +2); do
   keycloak-cli clients get "$c"
 done
-keycloak-cli logout</code></pre>
+keycloak-cli logout</code></pre></figure>
 
 <h2>Where to look</h2>
 

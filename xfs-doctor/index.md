@@ -31,15 +31,15 @@ title: "xfs-doctor — getting data back from an XFS image that will not mount"
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash">cargo install xfs-doctor</code></pre>
+<figure class="code"><pre><code class="language-bash">cargo install xfs-doctor</code></pre></figure>
 
 <p>A damaged image is usually explored in this order:</p>
 
-<pre><code class="language-bash">xfs-doctor read --device disk.img sb                     # find the superblock
+<figure class="code"><pre><code class="language-bash">xfs-doctor read --device disk.img sb                     # find the superblock
 xfs-doctor read --device disk.img --offset 0x100000 sb   # ...or at an offset
 xfs-doctor salvage --device disk.img --sb sb.bin \
   --chunk 512K --data-offset 8K --member 1 --out salvage/ --scan 256M
-xfs-doctor carve --device disk.img --out carve/ --types jpeg,png,mp4 --max 16M</code></pre>
+xfs-doctor carve --device disk.img --out carve/ --types jpeg,png,mp4 --max 16M</code></pre></figure>
 
 <p>
   Half of a RAID0 that lost its partner is a geometry problem;

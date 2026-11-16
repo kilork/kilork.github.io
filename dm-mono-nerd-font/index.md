@@ -33,11 +33,11 @@ title: "dm-mono-nerd-font — DM Mono, with the glyphs a terminal needs"
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash"># macOS
+<figure class="code"><pre><code class="language-bash"># macOS
 brew install --cask kilork/dm-mono-nerd-font/dm-mono-nerd-font
 
 # Linux
-curl -fsSL https://raw.githubusercontent.com/kilork/dm-mono-nerd-font/main/install.sh | bash</code></pre>
+curl -fsSL https://raw.githubusercontent.com/kilork/dm-mono-nerd-font/main/install.sh | bash</code></pre></figure>
 
 <p>
   Then pick "DM Mono Nerd Font" in your terminal and editor. The

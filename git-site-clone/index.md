@@ -30,12 +30,12 @@ title: "git-site-clone — paste a repository URL and it lands in the right plac
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash">cargo install git-site-clone</code></pre>
+<figure class="code"><pre><code class="language-bash">cargo install git-site-clone</code></pre></figure>
 
-<pre><code class="language-bash">git-site-clone config base ~/src
+<figure class="code"><pre><code class="language-bash">git-site-clone config base ~/src
 git-site-clone https://github.com/user/repo.git      # -&gt; ~/src/github.com/user/repo
 git-site-clone config mappings add github.com /Volumes/work/github.com
-git-site-clone config show</code></pre>
+git-site-clone config show</code></pre></figure>
 
 <h2>Where to look</h2>
 

@@ -32,11 +32,11 @@ title: "hg-git-fast-import — move Mercurial history into Git"
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash">cargo install hg-git-fast-import</code></pre>
+<figure class="code"><pre><code class="language-bash">cargo install hg-git-fast-import</code></pre></figure>
 
-<pre><code class="language-bash">hg-git-fast-import single ~/work/old-project ~/src/github.com/me/old-project
+<figure class="code"><pre><code class="language-bash">hg-git-fast-import single ~/work/old-project ~/src/github.com/me/old-project
 hg-git-fast-import multi --help       # several hg repos into one git repo
-hg-git-fast-import build-marks        # rebuild the saved state if needed</code></pre>
+hg-git-fast-import build-marks        # rebuild the saved state if needed</code></pre></figure>
 
 <h2>Where to look</h2>
 

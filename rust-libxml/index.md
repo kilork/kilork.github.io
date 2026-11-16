@@ -30,14 +30,14 @@ title: "rust-libxml — libxml2 with Rust's ownership"
   working tree.
 </p>
 
-<pre><code class="language-bash">cargo add libxml</code></pre>
+<figure class="code"><pre><code class="language-bash">cargo add libxml</code></pre></figure>
 
-<pre><code class="language-rust">use libxml::parser::Parser;
+<figure class="code"><pre><code class="language-rust">use libxml::parser::Parser;
 
 let document = Parser::default().parse_string("&lt;root&gt;&lt;child/&gt;&lt;/root&gt;")?;
 for node in document.child_nodes() {
     println!("{}", node.get_name());
-}</code></pre>
+}</code></pre></figure>
 
 <h2>Where to look</h2>
 

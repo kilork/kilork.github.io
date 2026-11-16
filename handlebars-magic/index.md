@@ -27,8 +27,8 @@ title: "handlebars-magic — one folder of templates, one rendered folder"
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash">cargo install handlebars-magic
-handlebars-magic templates .      # render templates/ into the current directory</code></pre>
+<figure class="code"><pre><code class="language-bash">cargo install handlebars-magic
+handlebars-magic templates .      # render templates/ into the current directory</code></pre></figure>
 
 <p>
   This very site's documentation is generated that way: the templates live next to

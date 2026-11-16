@@ -33,27 +33,24 @@ title: "static-files — bundle a website into your Rust binary"
 
 <h2>Getting it</h2>
 
-<pre><code class="language-bash">cargo add static-files --build
-cargo add static-files</code></pre>
+<figure class="code"><pre><code class="language-bash">cargo add static-files --build
+cargo add static-files</code></pre></figure>
 
 <p>Minimal case — a folder of files:</p>
 
-<pre><code class="language-rust">// build.rs
-use static_files::resource_dir;
+<figure class="code" data-file="build.rs"><pre><code class="language-rust">use static_files::resource_dir;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
     resource_dir("./static").build()
-}</code></pre>
+}</code></pre></figure>
 
-<pre><code class="language-rust">// src/main.rs
-include!(concat!(env!("OUT_DIR"), "/generated.rs"));
+<figure class="code" data-file="src/main.rs"><pre><code class="language-rust">include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
-let resources = generate();   // index.html, app.js, … as bytes</code></pre>
+let resources = generate();   // index.html, app.js, … as bytes</code></pre></figure>
 
 <p>With a frontend that needs building first:</p>
 
-<pre><code class="language-rust">// build.rs
-use static_files::NpmBuild;
+<figure class="code" data-file="build.rs"><pre><code class="language-rust">use static_files::NpmBuild;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
     NpmBuild::new("web")
@@ -62,7 +59,7 @@ fn main() -&gt; std::io::Result&lt;()&gt; {
         .target("web/dist")
         .to_resource_dir()
         .build()
-}</code></pre>
+}</code></pre></figure>
 
 <p>
   <code>NpmBuild</code> skips the install and the build when nothing changed, so this

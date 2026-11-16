@@ -31,7 +31,7 @@ title: Projects
       {% if project.page %}&middot; <a href="{{ project.page | relative_url }}">notes</a>{% endif %}
     </p>
     {% if project.install %}
-    <pre><code class="language-bash">{{ project.install }}</code></pre>
+    <figure class="code"><pre><code class="language-bash">{{ project.install }}</code></pre></figure>
     {% endif %}
   </section>
   {% endfor %}
