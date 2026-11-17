@@ -47,10 +47,10 @@ title: "pdf2 — PDF 2.0 in pure Rust, without a C engine"
 
 <figure class="code"><pre><code class="language-bash">cargo install pdf2-cli
 
-pdf2 info report.pdf            # version, pages, encryption, metadata
-pdf2 pages report.pdf           # object id, media/crop box, rotation per page
-pdf2 text report.pdf --all      # extracted text
-pdf2 check report.pdf           # decode and extract everything, report failures</code></pre></figure>
+pdf2 info report.pdf         # version, pages, encryption, metadata
+pdf2 pages report.pdf        # object id, boxes, rotation per page
+pdf2 text report.pdf --all   # extracted text
+pdf2 check report.pdf        # decode and extract everything</code></pre></figure>
 
 <p>As a library:</p>
 
