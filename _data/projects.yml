@@ -34,6 +34,21 @@
   page: /actix-web-static-files/
   install: cargo add actix-web-static-files --features static-files-03
 
+- name: pdf2
+  group: Static assets and web
+  tagline: Read, inspect and draw PDF 2.0 files in pure Rust.
+  benefit: >-
+    One crate and one document model: open a file, see exactly what it contains,
+    extract its text and (with the sibling crate) draw the page — no C library, no
+    <code>unsafe</code>, and the same code builds for <code>no_std</code> and wasm.
+    Every malformed file is an error, never a panic, and a decompression bomb is
+    refused by a byte budget instead of eating the process.
+  audience: Rust services that have to touch PDFs, and nowhere to put a C engine.
+  repo: https://github.com/pdf2-rs/pdf2
+  crate: https://crates.io/crates/pdf2
+  page: /pdf2/
+  install: cargo install pdf2-cli
+
 - name: keycloak-cli
   group: Keycloak and identity
   tagline: Every Keycloak admin operation as a command, generated from the crate.

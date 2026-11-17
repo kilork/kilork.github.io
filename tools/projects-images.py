@@ -88,6 +88,36 @@ def write(name, content):
     print("wrote", os.path.relpath(path, ROOT), len(content), "bytes")
 
 def draw():
+    # ---------------------------------------------------------------- pdf2
+    b = []
+    b.append(text(30, 42, "one crate, one model: read it, say what is in it, draw it", 17, MUTED, family=SANS))
+    # the file
+    b.append(rect(30, 70, 190, 210))
+    b.append(text(50, 104, "book.pdf", 17, TEXT, "700", SANS))
+    b.append(text(50, 134, "%PDF-2.0", 14, MUTED))
+    b.append(text(50, 160, "xref stream", 14, MUTED))
+    b.append(text(50, 186, "object stream", 14, MUTED))
+    b.append(text(50, 212, "AES-256", 14, MUTED))
+    # the crate
+    b.append(arrow(230, 175, 300, 175, label="open"))
+    b.append(rect(310, 60, 250, 230, fill="#1f6feb18", stroke=BLUE))
+    b.append(text(330, 96, "pdf2", 20, BLUE, "700", SANS))
+    b.append(text(330, 132, "Document", 15, TEXT))
+    b.append(text(330, 160, "pages · text", 15, TEXT))
+    b.append(text(330, 188, "no C, no unsafe", 15, MUTED))
+    b.append(text(330, 216, "core + alloc / wasm", 15, MUTED))
+    b.append(text(330, 244, "256 MiB decode budget", 15, MUTED))
+    # the three outcomes
+    for y, label, detail in (
+        (76, "pdf2 info", "version, pages, encryption"),
+        (160, "pdf2 text", "reading order, ToUnicode"),
+        (244, "pdf2-render", "RGBA8 page"),
+    ):
+        b.append(arrow(560, 175, 680, y + 14, color=MUTED))
+        b.append(text(700, y + 8, label, 17, TEXT, family=MONO))
+        b.append(text(700, y + 34, detail, 13, MUTED, family=SANS))
+    write("pdf2.svg", svg(1100, 330, "".join(b)))
+
     # ---------------------------------------------------------------- static-files
     b = []
     b.append(text(30, 42, "static files, bundled into the binary at build time", 17, MUTED, family=SANS))
